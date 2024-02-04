@@ -1,0 +1,64 @@
+{
+  "EnemySpawnTable": [
+    {
+      "stageLevel": 0,
+      "enemyID": 0,
+      "enemyMaxHP": 3,
+      "enemySpawnTimer": 0
+    },
+    {
+      "stageLevel": 1,
+      "enemyID": 1,
+      "enemyMaxHP": 3,
+      "enemySpawnTimer": 0
+    },
+    {
+      "stageLevel": 2,
+      "enemyID": 2,
+      "enemyMaxHP": 3,
+      "enemySpawnTimer": 0
+    },
+    {
+      "stageLevel": 3,
+      "enemyID": 3,
+      "enemyMaxHP": 4,
+      "enemySpawnTimer": 0
+    },
+    {
+      "stageLevel": 4,
+      "enemyID": 4,
+      "enemyMaxHP": 4,
+      "enemySpawnTimer": 0
+    },
+    {
+      "stageLevel": 5,
+      "enemyID": 5,
+      "enemyMaxHP": 4,
+      "enemySpawnTimer": 0
+    },
+    {
+      "stageLevel": 6,
+      "enemyID": 6,
+      "enemyMaxHP": 4,
+      "enemySpawnTimer": 0
+    },
+    {
+      "stageLevel": 7,
+      "enemyID": 7,
+      "enemyMaxHP": 5,
+      "enemySpawnTimer": 0
+    },
+    {
+      "stageLevel": 8,
+      "enemyID": 8,
+      "enemyMaxHP": 5,
+      "enemySpawnTimer": 0
+    },
+    {
+      "stageLevel": 9,
+      "enemyID": 9,
+      "enemyMaxHP": 5,
+      "enemySpawnTimer": 0
+    }
+  ]
+}
