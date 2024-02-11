@@ -18,6 +18,8 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float playerHP;
 
+    private Vector3Int lastCellPos;
+
     [SerializeField] 
     public bool isGhost;
     [SerializeField]
@@ -26,8 +28,10 @@ public class Player : MonoBehaviour
     [Header ("Animation Hash")]
     private int playerSpeedAnimationHash;
     private int playerDeadAnimationHash;
-    
-    [Header ("Utility")]
+
+    [Header("Utility")]
+    [SerializeField]
+    private GridManager gridManager;
     public EnemyScan enemyScanner;
     public HealthBar playerHealthBar;
     private IEnumerator blinkRoutine;
@@ -38,6 +42,8 @@ public class Player : MonoBehaviour
     private Animator playerAnimator;
     private Collider2D playerCollider;
     
+    // damageDelay: term for being invincible after get damage
+    // playerLayer: able to get damgae, ghostLayer: disable to get damage
     private WaitForSeconds damageDelay;
     private int playerLayer;
     private int ghostLayer;
@@ -81,7 +87,7 @@ public class Player : MonoBehaviour
         isGhost = false;
         isAlive = true;
         
-        damageDelay = new WaitForSeconds(3f);
+        damageDelay = new WaitForSeconds(0.5f);
         playerLayer = LayerMask.NameToLayer("Player");
         ghostLayer = LayerMask.NameToLayer("Ghost");
         
@@ -98,9 +104,11 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-        InitStat();
+        Init();
         playerSpeedAnimationHash = Animator.StringToHash("PlayerSpeed");
         playerDeadAnimationHash = Animator.StringToHash("PlayerDead");
+        
+        lastCellPos = gridManager.grid.WorldToCell(playerRigid.position);
     }
 
     private void FixedUpdate()
@@ -108,16 +116,10 @@ public class Player : MonoBehaviour
         if (InGameManager.Instance.isPaused)
             return;
         
-        float speedPerTime = playerSpeed * Time.fixedDeltaTime;
-        Vector2 playerNextVec = playerInputVec.normalized * speedPerTime;
-        playerRigid.MovePosition(playerRigid.position + playerNextVec);
+        GetPlayerCellPos();
+        MovePlayer();
     }
-
-    void OnMove(InputValue value)
-    {
-        playerInputVec = value.Get<Vector2>();
-    }
-
+    
     void LateUpdate()
     {
         if (InGameManager.Instance.isPaused)
@@ -130,13 +132,50 @@ public class Player : MonoBehaviour
             playerSprite.flipX = playerInputVec.x < 0;
         }
     }
-
-    public void InitStat()
+    
+    private void Init()
     {
         playerMaxHP = playerStat.Health.Value;
         playerSpeed = playerStat.Movement.Value;
         playerHP = playerMaxHP;
     }
+
+    #region Handle player movement
+
+    // keyboard input => playerInputVec
+    private void OnMove(InputValue value)
+    {
+        playerInputVec = value.Get<Vector2>();
+    }
+
+    // move player to the player input vector
+    private void MovePlayer()
+    {
+        float speedPerTime = playerSpeed * Time.fixedDeltaTime;
+        Vector2 playerNextVec = playerRigid.position + playerInputVec.normalized * speedPerTime;
+        playerRigid.MovePosition(playerNextVec);
+    }
+    
+    //observe change of cell position where player is located
+    public delegate void PlayerCellChanged(Vector3Int pos);
+    public event PlayerCellChanged NotifyPlayerCell;
+    
+    private void GetPlayerCellPos()
+    {
+        Vector3Int newCellPos = gridManager.grid.WorldToCell(playerRigid.position);
+        if (lastCellPos != newCellPos)
+        {
+            lastCellPos = newCellPos;
+            if (NotifyPlayerCell == null)
+                return;
+            NotifyPlayerCell(newCellPos);
+        }
+    }
+
+    #endregion
+
+
+    #region Handle when player get damage
 
     public void OnCollisionEnter2D(Collision2D coll)
     {
@@ -163,4 +202,7 @@ public class Player : MonoBehaviour
         gameObject.layer = playerLayer;
         isGhost = false;
     }
+
+    #endregion
+    
 }

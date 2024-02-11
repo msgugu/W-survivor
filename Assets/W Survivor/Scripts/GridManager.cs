@@ -15,11 +15,22 @@ public class GridManager : MonoBehaviour
     private UnityEngine.Grid _grid;
     
     private Dictionary<Vector3Int, Cell> _cells;
+
+    public int cellSizeX;
+    public int cellSizeY;
     
     private void Awake()
     {
         _grid = GetComponent<Grid>();
         _cells = new Dictionary<Vector3Int, Cell>();
+        
+        cellSizeX = (int)_grid.cellSize.x;
+        cellSizeY = (int)_grid.cellSize.y;
+    }
+    
+    public Grid grid
+    {
+        get { return _grid; }
     }
     
     public Cell GetCell(Vector3Int cellPos)
@@ -35,11 +46,10 @@ public class GridManager : MonoBehaviour
         return cell;
     }
 
+    public Cell GetCell(Vector2 cellPos) => GetCell(new Vector3Int((int)cellPos.x, (int)cellPos.y, 0));
+
     public void AddToCell(GameObject go)
     {
-        //Debug.Log(_grid);
-        //Debug.Log(go);
-        
         Vector3Int cellPos = _grid.WorldToCell(go.transform.position);
 
         Cell cell = GetCell(cellPos);
@@ -93,6 +103,34 @@ public class GridManager : MonoBehaviour
         else
         {
             Debug.Log("RemoveFromCell Type is wrong." + typeof(T).Name);
+        }
+    }
+    
+    // get the nearest cell in a particular direction
+    // 0-> right, 1->left, 2->down, 3->up
+
+    public Vector3Int GetNearCellPos(Vector3Int pos, int direction, int distance) =>
+        GetNearCellPos(pos.x, pos.y, direction, distance);
+    
+    public Vector3Int GetNearCellPos(int x, int y, int direction, int distance)
+    {
+        switch (direction)
+        {
+            case 0:
+                return new Vector3Int(x + (cellSizeX * distance), y, 0);
+                break;
+            case 1:
+                return new Vector3Int(x - (cellSizeX * distance), y, 0);
+                break;
+            case 2:
+                return new Vector3Int(x, y + (cellSizeY * distance), 0);
+                break;
+            case 3:
+                return new Vector3Int(x, y - (cellSizeY * distance), 0);
+                break;
+            default:
+                return Vector3Int.one;
+                break;
         }
     }
 

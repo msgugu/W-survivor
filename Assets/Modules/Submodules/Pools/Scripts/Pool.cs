@@ -293,9 +293,49 @@ namespace Redcode.Pools
 
             return clone;
         }
-        
+
         #endregion
 
+        #region GetWait(added)
+        
+        // Get and do something before SetActive(true);
+        // need to manually setActive in poolingManager class
+        Component IPool.GetWait() => GetWait();
+        public T GetWait()
+        {
+            T clone = null;
+
+            for (int i = 0; i < _clones.Count; i++)
+            {
+                if (!_busyObjects.Contains(_clones[i]))
+                {
+                    clone = _clones[i];
+                    break;
+                }
+            }
+
+            if (clone == null)
+            {
+                if (_count != 0 && _clones.Count >= _count)
+                    return null;
+
+                _clones.Add(clone = Object.Instantiate(_source, _container));
+
+                if (clone is IPoolObject obj)
+                    obj.OnCreatedInPool();
+            }
+
+            _busyObjects.Add(clone);
+
+            // clone.gameObject.SetActive(true);
+            // if (clone is IPoolObject resetable)
+            //     resetable.OnGettingFromPool();
+
+            return clone;
+        }
+
+        #endregion
+        
         #region Take
         void IPool.Take(Component clone) => Take((T)clone);
 
