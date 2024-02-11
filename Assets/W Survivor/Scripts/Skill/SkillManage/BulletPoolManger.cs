@@ -33,9 +33,7 @@ public class BulletPoolManager : PoolingManager
     
     public Bullet BulletSpawn(int poolIndex)
     {
-        Bullet newBullet = GetFromPool<Bullet>(poolIndex);
-        
-        return newBullet;
+        return GetFromPool<Bullet>(poolIndex);
     }
 
     public void BulletDespawn(int poolIndex, Bullet bulletClone)

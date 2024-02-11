@@ -31,11 +31,15 @@ public class PoolingManager : MonoBehaviour
     
     public IPool<T> GetPool<T>(int index) where T : Component => (IPool<T>)_pools[index];
     
+    //get object from pool
     public T GetFromPool<T>(int index) where T : Component => (T)_pools[index].Get();
     
-    //spawn objects and move to pos
+    //get object from pool and locate (using transform.position)
     public T GetFromPool<T>(int index, Vector3 pos) where T : Component => (T)_pools[index].Get(pos);
 
+    //get object from pool but not SetActive(true);
+    public T GetWaitFromPool<T>(int index) where T : Component => (T)_pools[index].GetWait();
+    
     public void ReturnPool<T>(int index, T clone) where T : Component
     {
         _pools[index].Take(clone);

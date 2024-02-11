@@ -7,6 +7,13 @@ using Redcode.Pools;
 public class Enemy : MonoBehaviour, IPoolObject
 {
     public int poolID;
+
+    public int PoolID
+    {
+        get { return poolID; }
+        set { poolID = value; }
+    }
+    
     public int enemyID;
     public float enemySpeed = 2.5f;
     public float enemyHealth;
@@ -97,6 +104,7 @@ public class Enemy : MonoBehaviour, IPoolObject
     {
         isAlive = true;
         enemyHealth = enemyMaxHealth;
+        
         enemyCollider.enabled = true;
         enemyRigid.simulated = true;
         enemyAnimator.SetBool("Dead", false);
@@ -106,8 +114,7 @@ public class Enemy : MonoBehaviour, IPoolObject
 
     private void EnemyReturnPool()
     {
-        healthBar.SetHealthBar(1);
-        InGameManager.Instance.enemyPoolManager.EnemyReturnPool(this);
+        InGameManager.Instance.enemyPoolManager.EnemyDespawn(poolID, this);
     }
 
     public void OnTriggerEnter2D(Collider2D collision)
@@ -118,7 +125,6 @@ public class Enemy : MonoBehaviour, IPoolObject
         enemyAnimator.SetTrigger("Hit");
         StartCoroutine(Attacked());
         
-        //enemyHealth -= collision.GetComponent<Bullet>().damage;
         int skillSlotIndex = collision.GetComponent<Bullet>().SlotIndex;
         enemyHealth -= InGameManager.Instance.damageManager.EnemyGetDamage(skillSlotIndex);
         

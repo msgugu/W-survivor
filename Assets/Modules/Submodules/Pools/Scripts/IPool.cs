@@ -66,6 +66,8 @@ namespace Redcode.Pools
 
         Component Get(Vector3 pos);
 
+        Component GetWait();
+
         /// <summary>
         /// Marks object as free. If object does not exist in pool's internal list, then it will be added (if it possible).
         /// </summary>
@@ -128,6 +130,8 @@ namespace Redcode.Pools
         
         new T Get(Vector3 pos);
 
+        new T GetWait();
+        
         new IPool<T> SetSource(Component newSource, bool deactiveClones);
     }
 }
