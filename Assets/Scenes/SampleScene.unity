@@ -17250,6 +17250,8 @@ MonoBehaviour:
   skills:
   - {fileID: 5878849355365250093, guid: 9c6a564784ef5e348ad8890ef9ca87c0, type: 3}
   - {fileID: 3832660341512987401, guid: 3e9e4a3e388fb664bb06ff378e9f9850, type: 3}
+  - {fileID: 5316296904106231521, guid: 369a4e71e630c084683a763df039d238, type: 3}
+  - {fileID: -5733377919986870756, guid: 31b1d764464e269489897b1bc355d63d, type: 3}
 --- !u!1 &458717668
 GameObject:
   m_ObjectHideFlags: 0
@@ -17434,7 +17436,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 9.569445
+  orthographic size: 19.993114
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -26162,9 +26164,9 @@ MonoBehaviour:
   playerSkillBaseStatManager: {fileID: 1058679983}
   playerBulletContainerManager: {fileID: 1225375522}
   playerBulletPoolManager: {fileID: 1004801926}
-  activeSkillNum: 0
-  playerSkillSlotStates: 
-  playerSkillIDs: 
+  activeSkillNum: 1
+  playerSkillSlotStates: 00
+  playerSkillIDs: 00000000
 --- !u!1 &696119312
 GameObject:
   m_ObjectHideFlags: 0

@@ -36,9 +36,10 @@ public class SkillManager : MonoBehaviour
     private void Start()
     {
         //for debug
-        AddSkill(1);
+        //AddSkill(1);
         //AddSkill(0);
-        
+        AddSkill(2);
+
     }
 
     public void AddSkill(int skillID)

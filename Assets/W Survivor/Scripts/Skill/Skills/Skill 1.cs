@@ -23,7 +23,7 @@ public class Skill1 : MonoBehaviour, ISkill
     public float Cooldown { get; set; }
 
     private Player _player;
-    private Bullet _currBullet;
+    private Bullet _currBullet;  
     private Transform _currBulletTrans;
     private Vector3 _currBulletPosition;
 

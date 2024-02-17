@@ -53,7 +53,10 @@ public class EnemyDataManager : MonoBehaviour
         for (int i = 0; i < enemyPrefabs.Length; i++)
         {
             GameObject enemyPrefab = enemyPrefabs[i];
-            EnemyData enemyData = new EnemyData(enemyPrefab.GetComponent<Transform>().localScale,enemyPrefab.GetComponent<SpriteRenderer>(), enemyPrefab.GetComponent<Animator>().runtimeAnimatorController, enemyPrefab.GetComponent<CapsuleCollider2D>());
+            EnemyData enemyData = new EnemyData(enemyPrefab.GetComponent<Transform>().localScale,
+                enemyPrefab.GetComponent<SpriteRenderer>(), 
+                enemyPrefab.GetComponent<Animator>().runtimeAnimatorController, 
+                enemyPrefab.GetComponent<CapsuleCollider2D>());
             enemyDataArray[enemyPrefabs[i].GetComponent<Enemy>().enemyID] = enemyData;
         }
     }

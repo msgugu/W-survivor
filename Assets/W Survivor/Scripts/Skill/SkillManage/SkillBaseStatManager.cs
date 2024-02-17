@@ -39,6 +39,26 @@ public class SkillBaseStatManager : MonoBehaviour
                 Pierce = 2,
                 Cooldown = 0.3f,
             },
+            new SkillBaseStat
+            {
+                SkillID = 2,
+                PoolNum = 1,
+                Damage = 20,
+                Count = 1,
+                Speed = 0,
+                Pierce = 2,
+                Cooldown = 0.1f,
+            },
+            new SkillBaseStat
+            {
+                SkillID = 3,
+                PoolNum = 1,
+                Damage = 20,
+                Count = 1,
+                Speed = 0,
+                Pierce = 2,
+                Cooldown = 0.1f,
+            },
         };
     }
 
