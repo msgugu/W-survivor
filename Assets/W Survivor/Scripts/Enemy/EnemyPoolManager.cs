@@ -10,7 +10,10 @@ public class EnemyPoolManager : PoolingManager
 
     public Enemy defaultEnemy;
     public Transform enemyContainer;
-    
+
+    // 풀링된 오브젝트 리스트
+    private List<Enemy> spawnedEnemies = new List<Enemy>();
+
     protected override void Awake()
     {
         base.Awake();
@@ -36,7 +39,8 @@ public class EnemyPoolManager : PoolingManager
             return null;
         
         newEnemy.PoolID = poolIndex;
-
+        // 리스트에 추가
+        spawnedEnemies.Add(newEnemy);
         return newEnemy;
     }
     
@@ -48,6 +52,8 @@ public class EnemyPoolManager : PoolingManager
             return null;
         
         newEnemy.PoolID = poolIndex;
+        // 리스트에 추가
+        spawnedEnemies.Add(newEnemy);
         newEnemy.enemyRigid.position = pos;
         
         return newEnemy;
@@ -55,6 +61,17 @@ public class EnemyPoolManager : PoolingManager
 
     public void EnemyDespawn(int poolIndex, Enemy enemyClone)
     {
+        // 리스트에서 삭제
+        spawnedEnemies.Remove(enemyClone);
         ReturnPool<Enemy>(poolIndex, enemyClone);
+    }
+
+    /// <summary>
+    /// 리스트 리턴용
+    /// </summary>
+    /// <returns></returns>
+    public List<Enemy> GetSpawnedEnemies()
+    {
+        return spawnedEnemies;
     }
 }

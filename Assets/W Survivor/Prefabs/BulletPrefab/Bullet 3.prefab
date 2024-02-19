@@ -164,7 +164,7 @@ MonoBehaviour:
   slotIndex: 0
   poolIndex: 0
   poolManager: {fileID: 0}
-  pierce: 0
+  pierce: 100
   currPierce: 0
   bulletType: 1
   bulletRigid: {fileID: 0}

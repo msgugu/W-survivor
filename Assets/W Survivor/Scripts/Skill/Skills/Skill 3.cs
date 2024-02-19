@@ -27,6 +27,8 @@ public class Skill3 : MonoBehaviour, ISkill
     public float Speed { get; set; }
     public int Pierce { get; set; }
     public float Cooldown { get; set; }
+    public float Duration { get; set; }
+
     #endregion
 
     private Player _player;
@@ -46,11 +48,17 @@ public class Skill3 : MonoBehaviour, ISkill
     {
         FireRode();
     }
-
+    /// <summary>
+    /// 총알이 플레이어 위치에 소환 되고 지속시간만큼 지속되다 삭제됨
+    /// </summary>
     private void FireRode()
     {
         _currBullet = BulletPoolM.BulletSpawn(PoolIndexes[0]);
         _currBullet.transform.position = _player.transform.position;
+        _currBullet.LifeTime = Duration;
+        _currBullet.StartLifeTimer();
     }
+
+    // DUration 다뺴기 
 
 }

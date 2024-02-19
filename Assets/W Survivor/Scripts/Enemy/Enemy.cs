@@ -127,7 +127,7 @@ public class Enemy : MonoBehaviour, IPoolObject
         
         int skillSlotIndex = collision.GetComponent<Bullet>().SlotIndex;
         enemyHealth -= InGameManager.Instance.damageManager.EnemyGetDamage(skillSlotIndex);
-        
+
         healthBar.SetHealthBar(enemyHealth / enemyMaxHealth);
         if (enemyHealth <= 0)
         {

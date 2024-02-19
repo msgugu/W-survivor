@@ -21,8 +21,10 @@ public class SkillManager : MonoBehaviour
     
     public List<Coroutine> PlayerSkillCorutines;
     public List<WaitForSeconds> PlayerSkillCooldowns;
-    
-    
+    public List<float> PlayerSkillDuration;
+
+
+
     private void Awake()
     {
         activeSkillNum = 0;
@@ -31,6 +33,7 @@ public class SkillManager : MonoBehaviour
         playerSkillIDs = new();
         PlayerSkillCorutines = new();
         PlayerSkillCooldowns = new();
+        PlayerSkillDuration = new();    
     }
 
     private void Start()
@@ -38,7 +41,7 @@ public class SkillManager : MonoBehaviour
         //for debug
         //AddSkill(1);
         //AddSkill(0);
-        AddSkill(2);
+        AddSkill(3);
 
     }
 

@@ -23,7 +23,8 @@ public class Skill0 : MonoBehaviour, ISkill
     public float Speed { get; set; }
     public int Pierce { get; set; }
     public float Cooldown { get; set; }
-    
+    public float Duration { get ; set ; }
+
     private Transform _currBulletTrans;
 
     public void InitSkill()

@@ -16,6 +16,7 @@ public interface ISkill
     float Speed { get; set; }
     int Pierce { get; set; }
     float Cooldown { get; set; }
+    float Duration {  get; set; }
     
     public void InitSkill();
     public void UseSkill();

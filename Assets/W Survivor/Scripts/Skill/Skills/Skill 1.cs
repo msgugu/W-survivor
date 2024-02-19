@@ -21,6 +21,8 @@ public class Skill1 : MonoBehaviour, ISkill
     public float Speed { get; set; }
     public int Pierce { get; set; }
     public float Cooldown { get; set; }
+    public float Duration { get; set; }
+
 
     private Player _player;
     private Bullet _currBullet;  

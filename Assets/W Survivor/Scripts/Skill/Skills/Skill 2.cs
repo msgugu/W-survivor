@@ -26,15 +26,17 @@ public class Skill2 : MonoBehaviour, ISkill
     public float Speed { get; set; }
     public int Pierce { get; set; }
     public float Cooldown { get; set; }
+    public float Duration { get; set; }
     #endregion
 
-    EnemyDataManager enemyDataManager;
+    EnemyPoolManager enemyPoolManager;
     private Bullet _currBullet;
 
 
     public void InitSkill()
     {
-        enemyDataManager = FindObjectOfType<EnemyDataManager>();
+        
+        enemyPoolManager = FindObjectOfType<EnemyPoolManager>();
     }
 
     public void UpgradeSkill()
@@ -48,22 +50,27 @@ public class Skill2 : MonoBehaviour, ISkill
 
     private void Lightning()
     {
-        /* 소환된 몬스터의 데이터를 가져야함
-         * 
-         * 
-         * 
-         */
-        
-            // 랜덤 적 게임 오브젝트 선택
-            GameObject target = enemyDataManager.enemyPrefabs[Random.Range(0,
-                enemyDataManager.enemyPrefabs.Length)];
+        // 풀링된 적 리스트 가져오기
+        List<Enemy> enemies = enemyPoolManager.GetSpawnedEnemies();
 
-            // 적의 Transform 컴포넌트를 통해 좌표 얻기
-            Vector3 targetPosition = target.transform.position;
+        // 적이 없다면 함수 종료
+        if (enemies.Count == 0)
+            return;
 
-            // 적위치에 소환
-            _currBullet = BulletPoolM.BulletSpawn(PoolIndexes[0]);
-            _currBullet.transform.position = targetPosition;
-        
+        // 랜덤 적 선택
+        Enemy target = enemies[Random.Range(0, enemies.Count)];
+
+        // 적의 Transform 컴포넌트를 통해 좌표 얻기
+        Vector3 targetPosition = target.transform.position;
+
+        // 적 위치에 불릿 소환
+        _currBullet = BulletPoolM.BulletSpawn(PoolIndexes[0]);
+
+        // 불릿이 없다면 함수 종료
+        if (_currBullet == null)
+            return;
+
+        _currBullet.transform.position = targetPosition;
+
     }
 }

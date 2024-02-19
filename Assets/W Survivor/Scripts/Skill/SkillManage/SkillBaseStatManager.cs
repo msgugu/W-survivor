@@ -28,6 +28,7 @@ public class SkillBaseStatManager : MonoBehaviour
                 Speed = 150,
                 Pierce = -1000,
                 Cooldown = 0,
+                Duration = 0,
             },
             new SkillBaseStat
             {
@@ -38,6 +39,7 @@ public class SkillBaseStatManager : MonoBehaviour
                 Speed = 15,
                 Pierce = 2,
                 Cooldown = 0.3f,
+                Duration = 0,
             },
             new SkillBaseStat
             {
@@ -46,8 +48,9 @@ public class SkillBaseStatManager : MonoBehaviour
                 Damage = 20,
                 Count = 1,
                 Speed = 0,
-                Pierce = 2,
+                Pierce = 1,
                 Cooldown = 0.1f,
+                Duration = 0,
             },
             new SkillBaseStat
             {
@@ -56,8 +59,9 @@ public class SkillBaseStatManager : MonoBehaviour
                 Damage = 20,
                 Count = 1,
                 Speed = 0,
-                Pierce = 2,
+                Pierce = 100,
                 Cooldown = 0.1f,
+                Duration = 5,
             },
         };
     }
@@ -89,4 +93,5 @@ public class SkillBaseStat
     public int Speed;
     public int Pierce;
     public float Cooldown;
+    public float Duration;
 }
