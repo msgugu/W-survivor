@@ -63,6 +63,17 @@ public class SkillBaseStatManager : MonoBehaviour
                 Cooldown = 0.1f,
                 Duration = 5,
             },
+            new SkillBaseStat
+            {
+                SkillID = 4,
+                PoolNum = 1,
+                Damage = 500,
+                Count = 1,
+                Speed = 0,
+                Pierce = 100,
+                Cooldown = 10f,
+                Duration = 5,
+            },
         };
     }
 

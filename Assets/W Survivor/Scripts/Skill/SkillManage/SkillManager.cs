@@ -41,7 +41,7 @@ public class SkillManager : MonoBehaviour
         //for debug
         //AddSkill(1);
         //AddSkill(0);
-        AddSkill(3);
+        AddSkill(4);
 
     }
 
