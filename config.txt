@@ -1,0 +1,3 @@
+[i18n]
+	commitEncoding = utf-8
+	loqOutEncoding = utf-8
